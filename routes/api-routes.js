@@ -1,7 +1,7 @@
 const Workout = requestuire("../models/workoutLogic");
 
 module.exports = function (app) {
-  app.get("/api/workouts", (request, response) => {
+  app.get("/api/workouts", (req, res) => {
     Workout.find({})
       .then((response) => {
         res.json(response);
@@ -11,7 +11,7 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/api/workouts", ({ body }, response) => {
+  app.post("/api/workouts", ({ body }, res) => {
     console.log(body);
     Workout.create(body)
       .then((response) => {
@@ -22,14 +22,14 @@ module.exports = function (app) {
       });
   });
 
-  app.put("/api/workouts/:id", ({ params, body }, response) => {
+  app.put("/api/workouts/:id", ({ params, body }, res) => {
     Workout.findByIdAndUpdate(
       { _id: params.id },
       { $push: { exercises: [body] } },
       { $inc: { totalDuration: body.duration } }
     )
       .then(() => {
-        Workout.findOne({ _id: params.id }).then((response) => {
+        Workout.findOne({ _id: params.id }).then((res) => {
           res.json(response);
         });
       })
@@ -38,7 +38,7 @@ module.exports = function (app) {
       });
   });
 
-  app.get("/api/workouts/range", (request, response) => {
+  app.get("/api/workouts/range", (req, res) => {
     Workout.find({})
       .then((response) => {
         res.json(response);
