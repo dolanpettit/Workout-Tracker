@@ -3,8 +3,8 @@ const Workout = requestuire("../models/workoutLogic");
 module.exports = function (app) {
   app.get("/api/workouts", (request, response) => {
     Workout.find({})
-      .then((responseult) => {
-        response.json(responseult);
+      .then((response) => {
+        res.json(response);
       })
       .catch((err) => {
         response.status(400).json(err);
@@ -14,11 +14,11 @@ module.exports = function (app) {
   app.post("/api/workouts", ({ body }, response) => {
     console.log(body);
     Workout.create(body)
-      .then((responseult) => {
-        response.json(responseult);
+      .then((response) => {
+        res.json(response);
       })
       .catch((err) => {
-        response.status(400).json(err);
+        res.status(400).json(err);
       });
   });
 
@@ -29,22 +29,22 @@ module.exports = function (app) {
       { $inc: { totalDuration: body.duration } }
     )
       .then(() => {
-        Workout.findOne({ _id: params.id }).then((responseult) => {
-          response.json(responseult);
+        Workout.findOne({ _id: params.id }).then((response) => {
+          res.json(response);
         });
       })
       .catch((err) => {
-        response.status(400).json(err);
+        res.status(400).json(err);
       });
   });
 
   app.get("/api/workouts/range", (request, response) => {
     Workout.find({})
-      .then((responseult) => {
-        response.json(responseult);
+      .then((response) => {
+        res.json(response);
       })
       .catch((err) => {
-        response.status(400).json(err);
+        res.status(400).json(err);
       });
   });
 };
