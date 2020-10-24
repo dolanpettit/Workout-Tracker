@@ -1,6 +1,7 @@
 const Workout = requestuire("../models/workoutLogic");
 
 module.exports = function (app) {
+  // Provides api route for retreiving all workouts
   app.get("/api/workouts", (req, res) => {
     Workout.find({})
       .then((response) => {
